@@ -1,16 +1,32 @@
 pragma solidity ^0.4.2;
 
-contract Proxy {
-  address  public contractAddress;
+import "./IGovernance.sol";
+import "./IMerit.sol";
 
-  function Proxy(address _contractAddress)
-  {
-   contractAddress = _contractAddress;
-  }
+contract Directory {
 
-  function getContractAddress()
-    returns (address)
-  {
-   return contractAddress;
-  }
+    address owner;
+
+    struct Record {
+        IMerit meritContract;
+        IGovernance governanceContract;
+        address owner;
+    }
+
+    mapping (bytes32=>Record) records;
+
+
+    function Directory(address _contractAddress)
+    {
+    }
+
+    function getMeritContract(bytes32 recordId) returns (IMerit)
+    {
+        return records[recordId].meritContract;
+    }
+
+    function getGovernanceContract(bytes32 recordId) returns (IGovernance)
+    {
+        return records[recordId].governanceContract;
+    }
 }
