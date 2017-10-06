@@ -8,8 +8,14 @@ contract Directory {
     address owner;
 
     struct Record {
-        IMerit meritContract;
-        IGovernance governanceContract;
+        IMerit voteMeritContract;
+        IVoteProposal voteProposalContract;
+
+        IMerit createProposalMeritContract;
+        ICreateProposal createProposalContract;
+
+        IProposalStorage proposalStorageContract;
+        
         address owner;
     }
 
