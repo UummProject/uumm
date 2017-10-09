@@ -1,16 +1,16 @@
 pragma solidity 0.4.15;
 
-import "./IGovernance.sol";
+import "./Governance.sol";
 import "./ProposalStorage.sol";
 import "./zeppelin/ownership/Ownable.sol";
 
 contract Directory is Ownable{
 
-    IMerit voteMeritContract;
-    IVoteProposal voteProposalContract;
-    IMerit createProposalMeritContract;
-    ICreateProposal createProposalContract;
-    ProposalStorage proposalStorageContract;
+    IMerit public voteMeritContract;
+    IVoteProposal public voteProposalContract;
+    IMerit public createProposalMeritContract;
+    ICreateProposal public createProposalContract;
+    ProposalStorage public proposalStorageContract;
 
     function Directory(address _owner)
     {
