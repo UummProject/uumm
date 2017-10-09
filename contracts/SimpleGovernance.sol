@@ -1,8 +1,8 @@
-pragma solidity ^0.4.2;
+pragma solidity 0.4.15;
 
 import "./IGovernance.sol";
 
-contract SimpleGoverance is IGovernance
+contract SimpleGoverance
 {
     //'referenceHash' assumes sha-256 encoded in hex
     // https://ethereum.stackexchange.com/questions/17094/how-to-store-ipfs-hash-using-bytes

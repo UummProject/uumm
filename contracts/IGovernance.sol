@@ -1,4 +1,4 @@
-pragma solidity ^0.4.2;
+pragma solidity 0.4.15;
 
 contract ProposalStorage
 {
@@ -22,17 +22,13 @@ contract ProposalStorage
         uint256 totalSupply; //This is so we can easly calculate the percentage of positive and negative votes even after resolution
     }
 
-    proposalData [] proposals;
+    proposalData [] public proposals;
 
     function getProposalsLength(bytes32 projectId) constant returns (uint256){
-        return projects[projectId].proposals.length;
+        return proposals.length;
     }
 
-    function addProposal(proposalData proposal){
-        proposals.push(proposal);
-    }
 }
-
 
 contract ICreateProposal
 {
@@ -46,3 +42,10 @@ contract IVoteProposal
     function VoteProposal(uint256 proposalId, bool vote);
     function ResolveProposal(uint256 proposalId);
 }
+
+contract IMerit
+{
+    function GetTotalSupply(bytes32 projectId) constant returns (uint256);
+    function GetMerit(address entity) constant returns (uint256);
+}
+

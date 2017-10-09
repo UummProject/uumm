@@ -1,38 +1,38 @@
-pragma solidity ^0.4.2;
+pragma solidity 0.4.15;
 
 import "./IGovernance.sol";
-import "./IMerit.sol";
 
 contract Directory {
 
     address owner;
 
-    struct Record {
+    struct Governance {
         IMerit voteMeritContract;
         IVoteProposal voteProposalContract;
 
         IMerit createProposalMeritContract;
         ICreateProposal createProposalContract;
 
-        IProposalStorage proposalStorageContract;
+        ProposalStorage proposalStorageContract;
         
         address owner;
     }
 
-    mapping (bytes32=>Record) records;
+    mapping (bytes32=>Governance) records;
 
 
     function Directory(address _contractAddress)
     {
     }
 
-    function getMeritContract(bytes32 recordId) returns (IMerit)
+    function addGovernance(
+        IMerit _voteMeritContract,
+        IVoteProposal _voteProposalContract,
+        IMerit _createProposalMeritContract,
+        ICreateProposal _createProposalContract,
+        ProposalStorage _proposalStorageContract,
+        address _owner)
     {
-        return records[recordId].meritContract;
-    }
 
-    function getGovernanceContract(bytes32 recordId) returns (IGovernance)
-    {
-        return records[recordId].governanceContract;
     }
 }
