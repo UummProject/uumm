@@ -1,6 +1,6 @@
 pragma solidity 0.4.15;
 
-import "./IGovernance.sol";
+import "./Governance.sol";
 
 contract SimpleGoverance
 {
