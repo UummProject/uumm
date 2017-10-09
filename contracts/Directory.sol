@@ -1,33 +1,39 @@
 pragma solidity 0.4.15;
 
 import "./IGovernance.sol";
-//import "./zeppelin/ownership/Ownable.sol";
+import "./zeppelin/ownership/Ownable.sol";
 
-contract Directory {
+contract Directory is Ownable{
 
     IMerit voteMeritContract;
     IVoteProposal voteProposalContract;
     IMerit createProposalMeritContract;
     ICreateProposal createProposalContract;
     ProposalStorage proposalStorageContract;
-    address owner;
-
 
     function Directory(address _owner)
     {
+        owner = _owner;
     }
 
-   /* function addGovernance(IMerit _voteMeritContract,
-        IVoteProposal _voteProposalContract,
-        IMerit _createProposalMeritContract,
-        ICreateProposal _createProposalContract,
-        ProposalStorage _proposalStorageContract)
-    {
-    }
-*/
-    function replaceVoteMeritContract(IMerit newVoteMeritContract)
-    {
+    function replaceVoteMerit(IMerit newVoteMeritContract) onlyOwner {
         voteMeritContract = newVoteMeritContract;
+    }
+
+    function replaceVoteProposal(IVoteProposal newVoteProposalContract) onlyOwner {
+        voteProposalContract = newVoteProposalContract;
+    }
+
+    function replaceCreateProposalMerit(IMerit newCreateProposalMeritContract) onlyOwner {
+        createProposalMeritContract = newCreateProposalMeritContract;
+    }
+
+    function replaceCreateProposal(ICreateProposal newCreateProposalContract) onlyOwner {
+        createProposalContract = newCreateProposalContract;
+    }
+
+    function replaceProposalStorage(ProposalStorage newProposalStorage) onlyOwner {
+        proposalStorageContract = newProposalStorage;
     }
 
 }
