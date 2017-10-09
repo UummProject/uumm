@@ -1,6 +1,7 @@
 pragma solidity 0.4.15;
 
 import "./IGovernance.sol";
+import "./ProposalStorage.sol";
 import "./zeppelin/ownership/Ownable.sol";
 
 contract Directory is Ownable{
@@ -17,7 +18,7 @@ contract Directory is Ownable{
     }
 
     function replaceVoteMerit(IMerit newContract) onlyOwner {
-        if (newContract != address(0))
+        if (newContract != address(0)) //TODO: I don't think is really necessary
             voteMeritContract = newContract;
     }
 
