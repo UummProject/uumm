@@ -1,5 +1,6 @@
 pragma solidity 0.4.15;
 
+//TODO abstract an interface out of it once its signature is clear
 contract ProposalStorage
 {
     enum proposalState{
@@ -12,8 +13,7 @@ contract ProposalStorage
     struct proposalData{
         uint256 id; 
         address author;
-        string title;
-        bytes32 referenceHash;
+        bytes32 referenceHash; //it is a json file, includes proposal title
         proposalState state;
         mapping (address=>int256) votes; //votes can be negative or positive. So we can track who has voted and its weight
         uint256 positiveVotes; //Necessary so we don't have to iterate over all the votes to know the final count.
@@ -24,8 +24,19 @@ contract ProposalStorage
 
     proposalData [] public proposals;
 
+    //Necessary? 'proposals' is public
     function getProposalsLength(bytes32 projectId) constant returns (uint256){
         return proposals.length;
+    }
+
+    function addProposal()
+    {
+        //checks here
+        uint256 proposalId = proposals.length;
+
+        proposalData memory proposal;
+        proposal.id = proposalId;
+        proposal.author = msg.sender;
     }
 
 }
