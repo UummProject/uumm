@@ -16,24 +16,29 @@ contract Directory is Ownable{
         owner = _owner;
     }
 
-    function replaceVoteMerit(IMerit newVoteMeritContract) onlyOwner {
-        voteMeritContract = newVoteMeritContract;
+    function replaceVoteMerit(IMerit newContract) onlyOwner {
+        if (newContract != address(0))
+            voteMeritContract = newContract;
     }
 
-    function replaceVoteProposal(IVoteProposal newVoteProposalContract) onlyOwner {
-        voteProposalContract = newVoteProposalContract;
+    function replaceVoteProposal(IVoteProposal newContract) onlyOwner {
+        if (newContract != address(0))
+            voteProposalContract = newContract;
     }
 
-    function replaceCreateProposalMerit(IMerit newCreateProposalMeritContract) onlyOwner {
-        createProposalMeritContract = newCreateProposalMeritContract;
+    function replaceCreateProposalMerit(IMerit newContract) onlyOwner {
+        if (newContract != address(0))
+            createProposalMeritContract = newContract;
     }
 
-    function replaceCreateProposal(ICreateProposal newCreateProposalContract) onlyOwner {
-        createProposalContract = newCreateProposalContract;
+    function replaceCreateProposal(ICreateProposal newContract) onlyOwner {
+        if (newContract != address(0))
+            createProposalContract = newContract;
     }
 
-    function replaceProposalStorage(ProposalStorage newProposalStorage) onlyOwner {
-        proposalStorageContract = newProposalStorage;
+    function replaceProposalStorage(ProposalStorage newContract) onlyOwner {
+        if (newContract != address(0))
+            proposalStorageContract = newContract;
     }
 
 }
