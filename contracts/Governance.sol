@@ -29,17 +29,17 @@ contract Governance is IVoteProposal, ICreateProposal{
 
     function createProposal(string title, bytes32 referenceHash)
     {
-        directory.createProposalContract.createProposal(title, referenceHash);
+        directory.createProposalContract().createProposal(title, referenceHash);
     }
 
     function voteProposal(uint256 proposalId, bool vote)
     {
-        directory.voteProposalContract.voteProposal(proposalId, vote);
+        directory.voteProposalContract().voteProposal(proposalId, vote);
     }
 
     function resolveProposal(uint256 proposalId)
     {
-        directory.voteProposalContract.resolveProposal(proposalId);
+        directory.voteProposalContract().resolveProposal(proposalId);
     }
 
 }
