@@ -37,9 +37,12 @@ contract Directory is Ownable{
             createProposalContract = newContract;
     }
 
+    /*
+    //Not sure if this one should be upgradable
     function replaceProposalStorage(ProposalStorage newContract) onlyOwner {
         if (newContract != address(0))
             proposalStorageContract = newContract;
     }
+    */
 
 }
