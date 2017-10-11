@@ -12,7 +12,7 @@ contract ICreateProposal{
     }
     //'referenceHash' assumes sha-256 encoded in hex
     // https://ethereum.stackexchange.com/questions/17094/how-to-store-ipfs-hash-using-bytes
-    function createProposal(string title, bytes32 referenceHash);
+    function createProposal(address author, bytes32 referenceHash);
 }
 
 
@@ -34,18 +34,44 @@ contract IMerit{
     function getMerit(address entity) constant returns (uint256);
 }
 
+contract CreateProposalImplementation is ICreateProposal
+{
+    /*
+    function CreateProposalImplementation(Directory _directory)
+    {
+        super(_directory);      
+    }*/
 
-contract Governance is IVoteProposal, ICreateProposal{
+    function CreateProposal(address author, bytes32 referenceHash)
+        returns (bool)
+    {
+        uint256 voteWeight = directory.createProposalMeritContract().getMerit(author);
+        if(voteWeight<=0)
+            return false;
+
+        bool added =  directory.proposalStorageContract().addProposal(author, referenceHash);
+
+        /*if(added)
+            record contributor
+        */
+        return added;
+    }
+
+}
+
+
+
+contract GovernanceBridge is IVoteProposal, ICreateProposal{
     Directory directory;
 
-    function Governance(Directory _directory)
+    function GovernanceBridge(Directory _directory)
     {
         directory = _directory;
     }
 
-    function createProposal(string title, bytes32 referenceHash)
+    function createProposal(address author, bytes32 referenceHash)
     {
-        directory.createProposalContract().createProposal(title, referenceHash);
+        directory.createProposalContract().createProposal(author, referenceHash);
     }
 
     function voteProposal(uint256 proposalId, bool vote)
