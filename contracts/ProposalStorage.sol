@@ -25,17 +25,25 @@ contract ProposalStorage
     proposalData [] public proposals;
 
     //Necessary? 'proposals' is public
-    function getProposalsLength(bytes32 projectId) constant returns (uint256){
+    function getProposalsLength() constant returns (uint256){
         return proposals.length;
     }
 
-    function addProposal()
+    function addProposal(address author, bytes32 referenceHash)
+        returns (bool)
     {
         //checks here
         uint256 proposalId = proposals.length;
 
         proposalData memory proposal;
         proposal.id = proposalId;
-        proposal.author = msg.sender;
+        proposal.author = author;
+        proposal.referenceHash = referenceHash;
+        proposal.state = proposalState.ongoing;
+        proposal.creationTimestamp = block.timestamp;
+
+        proposals.push(proposal);
+
+        return true;
     }
 }
