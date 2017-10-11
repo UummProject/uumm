@@ -3,15 +3,31 @@ pragma solidity 0.4.15;
 import "./Directory.sol";
 
 contract ICreateProposal{
+
+    Directory public directory;
+
+    function ICreateProposal(Directory _directory)
+    {
+        directory = _directory;
+    }
     //'referenceHash' assumes sha-256 encoded in hex
     // https://ethereum.stackexchange.com/questions/17094/how-to-store-ipfs-hash-using-bytes
     function createProposal(string title, bytes32 referenceHash);
 }
 
+
 contract IVoteProposal{
+    Directory public directory;
+
+    function IVoteProposal(Directory _directory)
+    {
+        directory = _directory;
+    }
+
     function voteProposal(uint256 proposalId, bool vote);
     function resolveProposal(uint256 proposalId);
 }
+
 
 contract IMerit{
     function getTotalSupply(bytes32 projectId) constant returns (uint256);
